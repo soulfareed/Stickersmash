@@ -1,65 +1,72 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 type ButtonProps = {
-    label: string;
-    onPress: () => void;
-    style?: object;
-    type?: "primary" | "secondary" | "danger"; // Example types for different button styles
+  label: string;
+  theme?: string;
 };
-
-export default function Button({ label, onPress, style, type = "primary" }: ButtonProps) {
-    // Define different styles based on the type prop
-    const buttonStyles = [
-        styles.buttonBase,
-        type === "primary" && styles.buttonPrimary,
-        type === "secondary" && styles.buttonSecondary,
-        type === "danger" && styles.buttonDanger,
-        style // custom styles passed from the parent component
-    ];
-
+export default function Button({ label, theme }: ButtonProps) {
+  if (theme === "primary") {
     return (
-        <View style={styles.container}>
-            <Pressable style={buttonStyles} onPress={onPress}>
-                <Text style={styles.buttonLabel}>{label}</Text>
-            </Pressable>
-        </View>
+      <View
+        style={[
+          styles.buttonContainer,
+          { borderWidth: 3, borderColor: "#ffd33d", borderRadius: 18 },
+        ]}
+      >
+        <Pressable
+          style={[styles.button, { backgroundColor: "#fff" }]}
+          onPress={() => alert("You pressed a button.")}
+        >
+          <FontAwesome
+            name="picture-o"
+            size={20}
+            color="#25292e"
+            style={styles.buttonIcon}
+          />
+          <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+            {" "}
+            {label}
+          </Text>
+        </Pressable>
+      </View>
     );
+  }
+  return (
+    <View style={styles.buttonContainer}>
+      <Pressable
+        style={styles.button}
+        onPress={() => alert("You Pressed a button")}
+      >
+        <Text style={styles.buttonLabel}>{label}</Text>
+      </Pressable>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        width: 400,
-        height: 70,
-        marginHorizontal: 20,
-        padding: 10,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    buttonBase: {
-        borderRadius: 10,
-        width: "100%",
-        height: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "row",
-    },
-    buttonPrimary: {
-        backgroundColor: 'grey',
-    },
-    buttonSecondary: {
-        backgroundColor: 'blue',
-    },
-    buttonDanger: {
-        backgroundColor: 'red',
-    },
-    buttonLabel: {
-        color: 'white',
-        fontSize: 20,
-    },
+  buttonContainer: {
+    width: 360,
+    height: 70,
+    marginHorizontal: 20,
+    padding: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    backgroundColor: "grey",
+    borderRadius: 10,
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  buttonLabel: {
+    color: "white",
+    fontSize: 20,
+  },
+  buttonIcon: {
+    paddingRight: 10,
+  },
 });
-<Button
-    label="Click Me"
-    onPress={() => alert('Button Pressed')}
-    type="primary" // or "secondary" or "danger"
-    style={{ marginVertical: 10 }} // Optional custom style
-/>
