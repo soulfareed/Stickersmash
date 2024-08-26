@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Image } from "react-native-web";
+import { StyleSheet, View, Image } from "react-native";
 
 const PlaceholderImage = require('../assets/images/background-image.png')
 
