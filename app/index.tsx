@@ -6,10 +6,11 @@ import Button from "@/components/Button";
 import * as ImagePicker from "expo-image-picker";
 
 const PlaceholderImage = require("../assets/images/background-image.png");
+
 // const PlaceholderImage = require("../assets/images/background-image.png");
 
 export default function App() {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(PlaceholderImage);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -17,7 +18,7 @@ export default function App() {
       quality: 1,
     });
     if (!result.canceled) {
-      setSelectedImage(result.assets[0].uri);
+      setSelectedImage(result.assets[0]);
     } else {
       alert("You did not select any image");
     }
@@ -25,10 +26,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <ImageViewer
-          placeholderImageSource={PlaceholderImage}
-          selectedImage={selectedImage}
-        />
+        <ImageViewer selectedImage={selectedImage} />
       </View>
 
       <View style={styles.footerContainer}>

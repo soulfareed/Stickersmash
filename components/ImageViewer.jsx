@@ -4,16 +4,12 @@ import { StyleSheet, View, Image } from "react-native";
 
   
 
-export default function App({placeholderImageSource, selectedImage}) {
+export default function App({ selectedImage}) {
 
-    const imageSource = selectedImage  ? { uri: selectedImage } : placeholderImageSource;
-    
-      
-      
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
-                <Image source={imageSource} style={styles.image} />
+                <Image source={selectedImage} style={styles.image} />
             </View>
             <StatusBar style="auto" />
         </View>
