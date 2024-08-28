@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import CircleButton from "../components/CircleButton";
 
 type ButtonProps = {
   label: string;
@@ -35,10 +36,7 @@ export default function Button({ label, theme, onPress }: ButtonProps) {
   }
   return (
     <View style={styles.buttonContainer}>
-      <Pressable
-        style={styles.button}
-        onPress={() => alert("You Pressed a button")}
-      >
+      <Pressable style={styles.button} onPress={onPress}>
         <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
     </View>
