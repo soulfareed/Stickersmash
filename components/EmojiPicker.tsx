@@ -6,6 +6,7 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const { height } = Dimensions.get("window");
 
@@ -56,7 +57,7 @@ export default function EmojiPicker({
               showHistory={true}
               showTabs={true}
               category={Categories.all}
-              columns={8} // Adjust the number of columns
+              columns={5} // Adjust the number of columns
             />
           </View>
         </Animated.View>
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     width: "100%",
-    height: "50%", // Adjust as needed
+    height: "45%", // Adjust as needed
     backgroundColor: "#fff",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -78,6 +79,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 10,
+    padding: 5,
   },
 });

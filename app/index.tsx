@@ -10,8 +10,6 @@ import EmojiPicker from "../components/EmojiPicker";
 
 const PlaceholderImage = require("../assets/images/background-image.png");
 
-// const PlaceholderImage = require("../assets/images/background-image.png");
-
 export default function App() {
   const [showAppOptions, setshowAppOptions] = useState(false);
   const [selectedImage, setSelectedImage] = useState(PlaceholderImage);
