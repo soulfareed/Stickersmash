@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Children, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import ImageViewer from "../components/ImageViewer";
@@ -15,7 +15,10 @@ const PlaceholderImage = require("../assets/images/background-image.png");
 export default function App() {
   const [showAppOptions, setshowAppOptions] = useState(false);
   const [selectedImage, setSelectedImage] = useState(PlaceholderImage);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const [selectedEmoji, setSelectedEmoji] = useState<string>("");
+  const [isPickerVisible, setPickerVisible] = useState<boolean>(false);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -35,12 +38,12 @@ export default function App() {
   };
 
   const onAddSticker = () => {
-    setIsModalVisible(true);
+    setPickerVisible(true);
   };
 
-  const onModalClose = () => {
-    setIsModalVisible(false);
-  };
+  // const onModalClose = () => {
+  //   setIsModalVisible(false);
+  // };
 
   const onSaveImageAsync = async () => {};
 
@@ -75,10 +78,16 @@ export default function App() {
         </View>
       )}
 
-      <EmojiPicker
+      {/* <EmojiPicker
         isVisible={isModalVisible}
         onClose={onModalClose}
-      ></EmojiPicker>
+      ></EmojiPicker> */}
+
+      <EmojiPicker
+        visible={isPickerVisible}
+        onClose={() => setPickerVisible(false)}
+        onSelect={(emoji) => setSelectedEmoji(emoji)}
+      />
 
       <StatusBar style="auto" />
     </View>

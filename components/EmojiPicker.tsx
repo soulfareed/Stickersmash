@@ -1,55 +1,83 @@
-import { Modal, View, Text, Pressable, StyleSheet } from "react-native";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { ReactNode } from "react";
+import React, { useEffect } from "react";
+import { View, StyleSheet, Button, Dimensions } from "react-native";
+import EmojiSelector, { Categories } from "react-native-emoji-selector";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
 
-type ButtonProps = {
-  isVisible: boolean;
-  children: ReactNode;
+const { height } = Dimensions.get("window");
+
+interface EmojiPickerProps {
+  visible: boolean;
   onClose: () => void;
-};
+  onSelect: (emoji: string) => void;
+}
 
 export default function EmojiPicker({
-  isVisible,
-  children,
+  visible,
   onClose,
-}: ButtonProps) {
+  onSelect,
+}: EmojiPickerProps) {
+  const translateY = useSharedValue(height);
+
+  useEffect(() => {
+    if (visible) {
+      translateY.value = withTiming(0, { duration: 300 });
+    } else {
+      translateY.value = withTiming(height, { duration: 300 });
+    }
+  }, [visible]);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: translateY.value }],
+    };
+  });
+
   return (
-    <Modal animationType="slide" transparent={true} visible={isVisible}>
-      <View style={styles.modalContent}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}> Choose a sticker</Text>
-          <Pressable onPress={onClose}>
-            <MaterialIcons name="close" color="#fff" size={25} />
-          </Pressable>
-        </View>
-        {children}
-      </View>
-    </Modal>
+    <>
+      {visible && (
+        <Animated.View style={[styles.animatedContainer, animatedStyle]}>
+          <View style={styles.container}>
+            <Button
+              title="Close"
+              onPress={() => {
+                onClose();
+              }}
+            />
+            <EmojiSelector
+              onEmojiSelected={(emoji) => {
+                onSelect(emoji);
+                onClose(); // Close the modal after selecting an emoji
+              }}
+              showSearchBar={true}
+              showHistory={true}
+              showTabs={true}
+              category={Categories.all}
+              columns={8} // Adjust the number of columns
+            />
+          </View>
+        </Animated.View>
+      )}
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  modalContent: {
-    height: "34%",
-    width: "100%",
-    backgroundColor: "#25292e",
-    borderTopRightRadius: 18,
-    borderTopLeftRadius: 18,
+  animatedContainer: {
     position: "absolute",
     bottom: 0,
+    width: "100%",
+    height: "50%", // Adjust as needed
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    overflow: "hidden",
   },
-  titleContainer: {
-    height: "18%",
-    backgroundColor: "#464C55",
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
-    paddingHorizontal: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  title: {
-    color: "#fff",
-    fontSize: 17,
+  container: {
+    flex: 1,
+    padding: 10,
   },
 });
