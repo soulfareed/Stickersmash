@@ -1,21 +1,23 @@
 import { Children, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ImageSourcePropType } from "react-native";
 import ImageViewer from "../components/ImageViewer";
 import Button from "@/components/Button";
 import * as ImagePicker from "expo-image-picker";
 import CircleButton from "../components/CircleButton";
 import IconButton from "../components/IconButton";
 import EmojiPicker from "../components/EmojiPicker";
+import EmojiSticker from "../components/EmojiSticker";
 
 const PlaceholderImage = require("../assets/images/background-image.png");
 
 export default function App() {
   const [showAppOptions, setshowAppOptions] = useState(false);
   const [selectedImage, setSelectedImage] = useState(PlaceholderImage);
+
   // const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const [selectedEmoji, setSelectedEmoji] = useState<string>("");
+  const [selectedEmoji, setSelectedEmoji] = useState<string | null>(null);
   const [isPickerVisible, setPickerVisible] = useState<boolean>(false);
 
   const pickImageAsync = async () => {
@@ -33,6 +35,8 @@ export default function App() {
 
   const onReset = () => {
     setshowAppOptions(false);
+    setSelectedEmoji(null);
+    setSelectedImage(PlaceholderImage);
   };
 
   const onAddSticker = () => {
@@ -46,9 +50,16 @@ export default function App() {
   const onSaveImageAsync = async () => {};
 
   return (
+    // <View>
+    //   <View style={styles.imageContainer}>
+
+    //   </View>
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageViewer selectedImage={selectedImage} />
+        {selectedEmoji && (
+          <EmojiSticker imageSize={100} stickerSource={selectedEmoji} />
+        )}
       </View>
       {showAppOptions ? (
         <View style={styles.optionsContainer}>
@@ -89,6 +100,7 @@ export default function App() {
 
       <StatusBar style="auto" />
     </View>
+    // </View>
   );
 }
 

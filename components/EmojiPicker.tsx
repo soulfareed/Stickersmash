@@ -6,7 +6,6 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const { height } = Dimensions.get("window");
 

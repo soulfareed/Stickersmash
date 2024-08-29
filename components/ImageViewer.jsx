@@ -1,52 +1,49 @@
 import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 
+export default function App({ selectedImage }) {
+  //   const [imageUri, setimageUri] = useState(null);
+  //   useEffect(() => {
+  //     console.log(selectedImage, imageUri);
+  //     if (selectedImage) {
+  //       setimageUri(selectedImage);
+  //     } else {
+  //       setimageUri(null);
+  //     }
+  //     return () => {};
+  //   }, [selectedImage]);
 
-  
-
-export default function App({ selectedImage}) {
-
-    return (
-        <View style={styles.container}>
-            <View style={styles.imageContainer}>
-                <Image source={selectedImage} style={styles.image} />
-            </View>
-            <StatusBar style="auto" />
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image source={selectedImage} style={styles.image} />
+      </View>
+      <StatusBar style="auto" />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#25292e',
-        alignItems: 'center'
-    },
-    imageContainer: {
-        flex: 1,
-        paddingTop: 50
-    },
-    image: {
-        width: 350,
-        height: 400,
-        borderRadius: 20
-
-    }
-})
-
-
-
-
-
-
-
-
+  container: {
+    flex: 1,
+    backgroundColor: "#25292e",
+    alignItems: "center",
+  },
+  imageContainer: {
+    flex: 1,
+    paddingTop: 50,
+  },
+  image: {
+    width: 350,
+    height: 400,
+    borderRadius: 20,
+  },
+});
 
 // import React, { useState } from 'react';
 // import { StyleSheet, View, Image, Button } from 'react-native';
 // import ImagePicker from 'react-native-image-crop-picker';
-
-
 
 // export default function App() {
 //   const [image, setImage] = useState<string | null>(null);
