@@ -16,30 +16,29 @@ type ButtonProps = {
 export default function EmojiSticker({
   imageSize,
   stickerSource,
-  imageStyle,
 }: ButtonProps) {
   if (!stickerSource) {
     return null;
   }
+
+  const scaleImage = useSharedValue(imageSize);
 
   useEffect(() => {
     console.log(stickerSource);
     return () => {};
   }, [stickerSource]);
 
-  const scaleImage = useSharedValue(imageSize);
   const doubleTap = Gesture.Tap()
     .numberOfTaps(2)
     .onStart(() => {
-      if (scaleImage.value !== imageSize * 2) {
+      if (scaleImage.value === imageSize) {
         scaleImage.value = scaleImage.value * 2;
       }
     });
 
   imageStyle = useAnimatedStyle(() => {
     return {
-      width: withSpring(scaleImage.value),
-      height: withSpring(scaleImage.value),
+      fontSize: withSpring(scaleImage.value),
     };
   });
   return (

@@ -55,7 +55,7 @@ export default function App() {
       <View style={styles.imageContainer}>
         <ImageViewer selectedImage={selectedImage} />
         {selectedEmoji && (
-          <EmojiSticker imageSize={100} stickerSource={selectedEmoji} />
+          <EmojiSticker imageSize={60} stickerSource={selectedEmoji} />
         )}
       </View>
       {showAppOptions ? (
