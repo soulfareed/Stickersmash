@@ -36,11 +36,11 @@ export default function EmojiSticker({
       }
     });
 
-  // imageStyle = useAnimatedStyle(() => {
-  //   return {
-  //     fontSize: withSpring(scaleImage.value),
-  //   };
-  // });
+  imageStyle = useAnimatedStyle(() => {
+    return {
+      fontSize: withSpring(scaleImage.value),
+    };
+  });
   return (
     <View style={styles.container}>
       <GestureDetector gesture={doubleTap}>
