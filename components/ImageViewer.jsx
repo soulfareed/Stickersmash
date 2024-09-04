@@ -3,17 +3,6 @@ import { useEffect, useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 
 export default function App({ selectedImage }) {
-  //   const [imageUri, setimageUri] = useState(null);
-  //   useEffect(() => {
-  //     console.log(selectedImage, imageUri);
-  //     if (selectedImage) {
-  //       setimageUri(selectedImage);
-  //     } else {
-  //       setimageUri(null);
-  //     }
-  //     return () => {};
-  //   }, [selectedImage]);
-
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>

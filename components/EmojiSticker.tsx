@@ -9,7 +9,7 @@ import Animated, {
 
 type EmojiStickerProps = {
   imageSize: number;
-  stickerSource: string;
+  stickerSource: any;
 };
 
 export default function EmojiSticker({

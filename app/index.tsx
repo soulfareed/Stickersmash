@@ -1,4 +1,4 @@
-import { Children, useState } from "react";
+import { useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, ImageSourcePropType } from "react-native";
 import ImageViewer from "../components/ImageViewer";
@@ -11,10 +11,15 @@ import EmojiSticker from "../components/EmojiSticker";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as MediaLibrary from "expo-media-library";
 import { captureRef } from "react-native-view-shot";
-import { useRef } from "react";
 
 const PlaceholderImage = require("../assets/images/background-image.png");
 
+type SelectedEmoji = {
+  emoji: string;
+  size: number;
+  x: number;
+  y: number;
+};
 export default function App() {
   const imageRef = useRef(null);
   const [status, requestPermission] = MediaLibrary.usePermissions();
@@ -22,8 +27,11 @@ export default function App() {
   const [showAppOptions, setshowAppOptions] = useState(false);
   const [selectedImage, setSelectedImage] = useState(PlaceholderImage);
 
-  const [selectedEmoji, setSelectedEmoji] = useState<string | null>(null);
+  const [selectedEmoji, setSelectedEmoji] = useState<string[]>([]);
   const [isPickerVisible, setPickerVisible] = useState<boolean>(false);
+  if (status === null) {
+    requestPermission();
+  }
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -38,13 +46,9 @@ export default function App() {
     }
   };
 
-  if (status === null) {
-    requestPermission();
-  }
-
   const onReset = () => {
     setshowAppOptions(false);
-    setSelectedEmoji(null);
+    setSelectedEmoji([]);
     setSelectedImage(PlaceholderImage);
   };
 
@@ -77,9 +81,11 @@ export default function App() {
       <View style={styles.imageContainer}>
         <View ref={imageRef} collapsable={false}>
           <ImageViewer selectedImage={selectedImage} />
-          {selectedEmoji && (
-            <EmojiSticker imageSize={60} stickerSource={selectedEmoji} />
-          )}
+          {selectedEmoji && selectedEmoji.length
+            ? selectedEmoji.map((ele) => {
+                return <EmojiSticker imageSize={60} stickerSource={ele} />;
+              })
+            : null}
         </View>
       </View>
       {showAppOptions ? (
@@ -116,7 +122,13 @@ export default function App() {
       <EmojiPicker
         visible={isPickerVisible}
         onClose={() => setPickerVisible(false)}
-        onSelect={(emoji) => setSelectedEmoji(emoji)}
+        onSelect={(emoji) => {
+          console.log("current emoji", emoji);
+          let arr = selectedEmoji;
+
+          arr.push(emoji);
+          setSelectedEmoji(arr);
+        }}
       />
 
       <StatusBar style="auto" />
