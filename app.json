@@ -8,7 +8,7 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "imaga" : "./assets/splash.png",
+      "imaga": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#25292e"
     },
@@ -31,6 +31,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "17ca8041-83f4-4649-89ea-7f4d5a979541"
+      }
+    },
+    "owner": "fareed501"
   }
 }
