@@ -13,7 +13,8 @@
       "backgroundColor": "#25292e"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "Stickersmash.com"
     },
     "android": {
       "adaptiveIcon": {
