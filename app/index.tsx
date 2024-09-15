@@ -128,10 +128,10 @@ export default function App() {
         </View>
       )}
 
-      <EmojiPicker
+      {/* <EmojiPicker
         isVisible={isModalVisible}
         onClose={onModalClose}
-      ></EmojiPicker>
+      ></EmojiPicker> */}
 
       <EmojiPicker
         visible={isPickerVisible}
