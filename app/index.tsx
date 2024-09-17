@@ -150,20 +150,20 @@ export default function App() {
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#25292e",
-//     alignItems: "center",
-//   },
-//   imageContainer: {
-//     flex: 1,
-//     paddingTop: 58,
-//   },
-//   footerContainer: {
-//     alignItems: "center",
-//     flex: 1 / 3,
-//   },
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#25292e",
+    alignItems: "center",
+  },
+  imageContainer: {
+    flex: 1,
+    paddingTop: 58,
+  },
+  footerContainer: {
+    alignItems: "center",
+    flex: 1 / 3,
+  },
   optionsContainer: {
     position: "absolute",
     bottom: 80,
